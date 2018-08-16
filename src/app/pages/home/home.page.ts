@@ -7,5 +7,19 @@ import { PhotosProvider } from '../../providers/photos';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-	constructor(private photosProvider:PhotosProvider){}
+	pics:any;
+	page;
+	constructor(private photosProvider:PhotosProvider){
+		this.page=1;
+		this.photosProvider.getPhotos(this.page).then(photos=>{
+			this.pics = photos;
+		});
+	}
+	clickButton=()=>{
+		this.page++;
+		this.photosProvider.getPhotos(this.page).then(photos=>{
+			this.pics = [...this.pics,...photos];
+		});
+	}
 }
+

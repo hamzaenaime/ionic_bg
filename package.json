@@ -27,6 +27,7 @@
     "@ionic/pro": "2.0.3",
     "core-js": "^2.5.3",
     "rxjs": "6.2.2",
+    "unsplash-js": "^4.8.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

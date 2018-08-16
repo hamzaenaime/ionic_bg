@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    	<ion-icon name="arrow-back" size-md [routerDirection]="'root'" [routerLink]="['/home']"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="pic">
+	<ion-card>
+	  <ion-img src="{{pic.urls.regular}}" [routerDirection]="'root'" [routerLink]="['/photo',pic.id,'fullimage']"></ion-img>
+
+	  <ion-card-content>
+		<ion-grid>
+		  <ion-row >
+		    <ion-col no-margin no-padding >
+		    	<ion-list>
+		    		<ion-item>	
+					    <ion-avatar slot="start">
+					      <ion-img src="{{pic.user.profile_image.small}}"></ion-img>
+					    </ion-avatar>
+					    <ion-label>
+					      <h2><a href="{{pic.user.links.html}}">{{pic.user.name}}</a></h2>
+					      <p>{{pic.user.bio}}</p>
+					    </ion-label>
+		    		</ion-item>	
+		    	</ion-list>	
+		    </ion-col>
+		    <ion-col>
+		  		<ion-list>
+		    		<ion-item>	
+					   <ion-icon name="cloud-download"></ion-icon>
+					   <span class="photo-info">{{pic.downloads}}</span>
+		    		</ion-item>
+		    		<ion-item>	
+					   <ion-icon name="heart"></ion-icon>{{' '}}
+					   <span class="photo-info">{{pic.likes}}</span>
+		    		</ion-item>	
+		    		<ion-item>	
+		    			<ion-icon name="eye"></ion-icon>{{' '}}
+					   <span class="photo-info">{{pic.views}}</span>
+		    		</ion-item>		
+		    	</ion-list>	
+		  	</ion-col>
+		    <ion-col>
+		  		<ion-button color="success" (click)="downloadthis()">
+		  			Download
+					<ion-icon name="download"></ion-icon>
+		  		</ion-button>
+		  	</ion-col>
+		  </ion-row>
+		</ion-grid>
+	  </ion-card-content>
+	</ion-card>
+</ion-content>

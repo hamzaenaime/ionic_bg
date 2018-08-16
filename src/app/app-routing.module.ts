@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './pages/list/list.module#ListPageModule'
-  }
+  },
+  { 
+    path: 'photo/:id', loadChildren: './pages/photo/photo.module#PhotoPageModule'
+  },
+  { path: 'photo/:id/fullimage', loadChildren: './pages/fullimage/fullimage.module#FullimagePageModule' }
 ];
 
 @NgModule({

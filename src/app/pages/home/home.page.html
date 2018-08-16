@@ -9,8 +9,52 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the
-    <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <div *ngIf="pics" >
+    <span *ngFor="let pic of pics">
+          <img class="home-imgs" src="{{pic.urls.thumb}}" [routerDirection]="'root'" [routerLink]="['/photo',pic.id]">
+    </span>
+  
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col >
+          <ion-button  color="light" (click)="clickButton()">More</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+    <div *ngIf="!pics" >
+      <h2>loading data</h2>
+    </div>
 </ion-content>
+
+<!-- 
+
+<ion-content padding>
+  <ion-grid *ngIf="pics" >
+  <ion-row *ngFor="let pic of pics" >
+    <ion-col  size="4">
+      <div>
+        <img src="{{pic.urls.thumb}}">
+      </div>
+    </ion-col>
+    <ion-col  size="4">
+      <div>
+        <img src="{{pic.urls.thumb}}">
+      </div>
+    </ion-col>
+    <ion-col  size="4">
+      <div>
+        <img src="{{pic.urls.thumb}}">
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-button color="secondary" (click)="clickButton()">Secondary</ion-button>
+</ion-content>
+-->
+
+
+
