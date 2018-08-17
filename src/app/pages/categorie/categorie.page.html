@@ -1,9 +1,9 @@
 <ion-header >
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title *ngIf="info">
+    <ion-title *ngIf="info" color="warning">
       {{info.title}}
     </ion-title>
   </ion-toolbar>
@@ -11,7 +11,7 @@
 
 
 
-<ion-content padding>
+<ion-content padding color="dark">
   <div *ngIf="photos">
   	<ion-card *ngIf="info">
 	  <ion-card-header style="text-align: center;">

@@ -1,16 +1,16 @@
 
 <ion-header >
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title color="warning">
       Search
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding 
+<ion-content padding color="dark" 
 	[scrollEvents]="true"
     (ionScrollEnd)="getScrollElement()">
 	<form (submit)="search(name.value)" fixed>  

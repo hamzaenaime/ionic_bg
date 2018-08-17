@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
-    	<ion-icon name="arrow-back" size-md [routerDirection]="'root'" [routerLink]="['/home']"></ion-icon>
+  <ion-toolbar color="dark">
+    	<ion-icon color="secondary" name="arrow-back" class="arrow-back"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="pic">
+<ion-content *ngIf="pic" color="dark">
 	<ion-card>
 	  <ion-img src="{{pic.urls.regular}}" [routerDirection]="'root'" [routerLink]="['/photo',pic.id,'fullimage']"></ion-img>
 
