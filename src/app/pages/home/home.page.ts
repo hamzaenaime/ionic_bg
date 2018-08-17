@@ -11,13 +11,13 @@ export class HomePage {
 	page;
 	constructor(private photosProvider:PhotosProvider){
 		this.page=1;
-		this.photosProvider.getPhotos(this.page).then(photos=>{
+		this.photosProvider.getPhotos(this.page,"latest").then(photos=>{
 			this.pics = photos;
 		});
 	}
 	clickButton=()=>{
 		this.page++;
-		this.photosProvider.getPhotos(this.page).then(photos=>{
+		this.photosProvider.getPhotos(this.page,"latest").then(photos=>{
 			this.pics = [...this.pics,...photos];
 		});
 	}

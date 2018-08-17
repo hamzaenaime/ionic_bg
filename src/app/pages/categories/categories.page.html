@@ -9,6 +9,53 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding >
+	<form (submit)="search(name.value)" fixed>  
+	    <ion-searchbar #name></ion-searchbar>
+	 </form>
+    <div *ngIf="categories">
+      <ion-grid >
+          <ion-row align-items-center *ngFor="let categorie of categories">
+            <ion-col>
+              <ion-card [routerDirection]="'root'" [routerLink]="['/categorie',categorie.id]">
+                <ion-grid  >
+                  <ion-row>
+                    <ion-col>
+                      <img src="{{categorie.preview_photos[0].urls.small}}" height="300" width="42">
+                    </ion-col>
+                    <ion-col>
+                      <img src="{{categorie.preview_photos[1].urls.small}}" height="300" width="42">
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <img src="{{categorie.preview_photos[2].urls.small}}" height="300" width="42">
+                    </ion-col>
+                    <ion-col>
+                      <img src="{{categorie.preview_photos[3].urls.small}}" height="300" width="42">
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-card-content>
+                  <ion-card-title>{{categorie.title}}</ion-card-title>
+                  <span *ngFor="let tag of categorie.tags">#{{tag.title}} ,</span>
 
+                  <h6>{{categorie.total_photos}} photos</h6>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid>
+          <ion-row align-items-center>
+            <ion-col *ngIf="!searching">
+              <ion-button  color="light" (click)="clickButton()">More</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div *ngIf="!categories" >
+        <h2>loading data</h2>
+      </div>
 </ion-content>

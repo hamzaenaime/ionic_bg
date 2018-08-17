@@ -26,7 +26,8 @@ const routes: Routes = [
   { 
     path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' 
   },
-  { path: 'search', loadChildren: './pages/search/search.module#SearchPageModule' }
+  { path: 'search', loadChildren: './pages/search/search.module#SearchPageModule' },
+  { path: 'categorie/:id', loadChildren: './pages/categorie/categorie.module#CategoriePageModule' }
 ];
 
 @NgModule({

@@ -1,3 +1,4 @@
+
 <ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -9,7 +10,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding 
+	[scrollEvents]="true"
+    (ionScrollEnd)="getScrollElement()">
 	<form (submit)="search(name.value)" fixed>  
 	    <ion-searchbar #name></ion-searchbar>
 	 </form>

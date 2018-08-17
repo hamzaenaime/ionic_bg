@@ -1,22 +1,25 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Content } from '@ionic/angular';
 import { PhotosProvider } from '../../providers/photos';
+
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
 })
+
 export class SearchPage implements OnInit {
 	pics:any;
 	page;
 	name;
+
 	constructor(private photosProvider:PhotosProvider){
 		this.page=1;
-		this.name='hamza';
 	}
-
-  ngOnInit() {
-  }
+	ngOnInit(){}
+  
   search=(name)=>{
   	this.name=name;
 		this.photosProvider.searchByName(name,this.page).then(photos=>{
@@ -32,6 +35,9 @@ export class SearchPage implements OnInit {
 			this.pics = [...this.pics,...photos.results];
 			console.log(this.pics,this.page);
 		});
+	}
+	logScrolling =(event)=>{
+		console.log (window);
 	}
 }
 
