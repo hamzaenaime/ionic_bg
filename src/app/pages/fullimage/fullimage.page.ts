@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class FullimagePage implements OnInit {
 	pic:any;
 	id;
+	show:boolean=true;
 	constructor(private photosProvider:PhotosProvider,private _Activatedroute:ActivatedRoute){
 		_Activatedroute.params.subscribe(params => {this.id = params['id'];});
 		this.photosProvider.getPhoto(this.id).then(photo=>{
@@ -19,6 +20,10 @@ export class FullimagePage implements OnInit {
 
 	downloadthis=()=>{
 		this.photosProvider.download(this.id);
+	}
+
+	display=()=>{
+		this.show=!this.show;
 	}
 
 	ngOnInit(){
