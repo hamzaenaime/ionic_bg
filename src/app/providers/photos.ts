@@ -18,6 +18,7 @@ export class PhotosProvider {
 	}
 
 	getPhotos = (page)=>{
+		//return this.unsplash.photos.listPhotos(page, 15, "")
 		return this.unsplash.photos.listPhotos(page, 15, "latest")
 			  .then(res=>res.json());
 			  //.then(json =>console.log(json));
@@ -33,5 +34,9 @@ export class PhotosProvider {
 		    this.unsplash.photos.downloadPhoto(json);
 		    console.log("photo downloaded...");
 		  });
+	}
+	searchByName=(name,page)=>{
+		return this.unsplash.search.photos(name, page)
+		  .then(res=>res.json());
 	}
 }

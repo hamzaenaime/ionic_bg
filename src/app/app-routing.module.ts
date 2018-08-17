@@ -11,14 +11,22 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './pages/home/home.module#HomePageModule'
   },
-  {
-    path: 'list',
-    loadChildren: './pages/list/list.module#ListPageModule'
-  },
   { 
     path: 'photo/:id', loadChildren: './pages/photo/photo.module#PhotoPageModule'
   },
-  { path: 'photo/:id/fullimage', loadChildren: './pages/fullimage/fullimage.module#FullimagePageModule' }
+  { 
+    path: 'photo/:id/fullimage', loadChildren: './pages/fullimage/fullimage.module#FullimagePageModule' 
+  },
+  { 
+    path: 'categories', loadChildren: './pages/categories/categories.module#CategoriesPageModule' 
+  },
+  { 
+    path: 'popular', loadChildren: './pages/popular/popular.module#PopularPageModule' 
+  },
+  { 
+    path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' 
+  },
+  { path: 'search', loadChildren: './pages/search/search.module#SearchPageModule' }
 ];
 
 @NgModule({

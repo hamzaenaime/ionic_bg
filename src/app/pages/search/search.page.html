@@ -1,0 +1,33 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Search
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	<form (submit)="search(name.value)" fixed>  
+	    <ion-searchbar #name></ion-searchbar>
+	 </form>
+	<div *ngIf="pics">
+	  <ion-grid >
+	      <ion-row align-items-center *ngFor="let pic of pics">
+	        <ion-col>
+	          <img class="home-imgs" src="{{pic.urls.small}}" [routerDirection]="'root'" [routerLink]="['/photo',pic.id]">
+	        </ion-col>
+	      </ion-row>
+	    </ion-grid>
+
+	    <ion-grid>
+	      <ion-row align-items-center>
+	        <ion-col >
+	          <ion-button  color="light" (click)="clickButton()">More</ion-button>
+	        </ion-col>
+	      </ion-row>
+	    </ion-grid>
+	</div>
+</ion-content>

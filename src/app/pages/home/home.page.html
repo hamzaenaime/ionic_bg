@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -12,11 +12,15 @@
 
 
 <ion-content padding>
-  <div *ngIf="pics" >
-    <span *ngFor="let pic of pics">
-          <img class="home-imgs" src="{{pic.urls.thumb}}" [routerDirection]="'root'" [routerLink]="['/photo',pic.id]">
-    </span>
-  
+  <div *ngIf="pics">
+  <ion-grid >
+      <ion-row align-items-center *ngFor="let pic of pics">
+        <ion-col>
+          <img class="home-imgs" src="{{pic.urls.small}}" [routerDirection]="'root'" [routerLink]="['/photo',pic.id]">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
     <ion-grid>
       <ion-row align-items-center>
         <ion-col >
