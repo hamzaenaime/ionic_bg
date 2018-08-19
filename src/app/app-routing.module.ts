@@ -8,8 +8,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './pages/home/home.module#HomePageModule'
+    path: 'latest',
+    loadChildren: './pages/latest/home.module#HomePageModule'
   },
   { 
     path: 'photo/:id', loadChildren: './pages/photo/photo.module#PhotoPageModule'
@@ -26,9 +26,9 @@ const routes: Routes = [
   { 
     path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' 
   },
-  { path: 'search', loadChildren: './pages/search/search.module#SearchPageModule' },
+  { path: 'home', loadChildren: './pages/home/search.module#SearchPageModule' },
   { path: 'categorie/:id', loadChildren: './pages/categorie/categorie.module#CategoriePageModule' },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' }
+  { path: 'profile/:id/:username', loadChildren: './pages/profile/profile.module#ProfilePageModule' }
 ];
 
 @NgModule({

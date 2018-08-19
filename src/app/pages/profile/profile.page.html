@@ -1,9 +1,101 @@
 <ion-header >
   <ion-toolbar color="dark">
-    <ion-title color="warning">profile</ion-title>
+    	<ion-icon color="secondary" name="arrow-back" class="arrow-back" [routerDirection]="'back'" [routerLink]="['/photo',back_id]" ></ion-icon>
+    	<span *ngIf="profile" class="name">{{profile.name}}</span>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding color="dark">
+<ion-content padding color="dark" [scrollEvents]="true" [scrollEvents]="true"
+  (ionScrollStart)="logScrollStart()"
+  (ionScrollEnd)="logScrollEnd()">
+	<ion-fab vertical="bottom" horizontal="end"  slot="fixed" *ngIf="scroll_fab">
+		    <ion-fab-button (click)="scrollToTop()">
+		      <ion-icon name="arrow-dropup-circle"></ion-icon>
+		    </ion-fab-button>
+	</ion-fab>
+   <ion-scroll #scroll scrollY="true">
+	<div *ngIf="profile">	
+		<ion-grid>
+			<ion-row align-items-center>
+				<ion-col size="4" >
+					<img class="profile-img" src="{{profile.profile_image.large}}">
+				</ion-col>
+				<ion-col class="info" >
+					<strong >downloads</strong>
+					<div class="label">
+						{{profile.downloads}}	
+					</div>
+				</ion-col>
+				<ion-col class="info" >
+					<div></div>
+					<strong>likes</strong>
+					<div class="label">
+						{{profile.total_likes}}
+					</div>
+				</ion-col>
+				<ion-col class="info" >
+					<strong>images</strong>
+					<div class="label">
+						{{profile.total_photos}}
+					</div>
+				</ion-col>
+				<ion-col class="info">
+					<strong>following</strong>
+					<div class="label">
+						{{profile.following_count}}
+					</div>
+				</ion-col>
+				<ion-col class="info">
+					<strong>followers</strong>
+					<div class="label">
+						{{profile.followers_count}}
+					</div>
+				</ion-col >
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="username">
+						<div class="user" *ngIf="profile.username">{{profile.username}}</div>
+						<div class="item" *ngIf="profile.location"><span class="labels"><i class="fas fa-map-marker-alt"></i></span>{{profile.location}}</div>
+						<div class="item" *ngIf="profile.portfolio_url"><span class="labels"><i class="fas fa-at"></i></span>{{profile.portfolio_url}}</div>
+						<div class="item" *ngIf="profile.twitter_username"><span class="labels"><i class="fab fa-twitter"></i></span> {{profile.twitter_username}}</div>
+						<div class="item" *ngIf="profile.instagram_username"><span class="labels"><i class="fab fa-instagram"></i></span> {{profile.instagram_username}}</div>
+						<div class="item" *ngIf="profile.bio"><span class="labels"><i class="fas fa-atlas"></i></span>{{profile.bio}}</div>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<ion-card *ngFor="let pic of user_photos">
+	        <img class="home-imgs" src="{{pic.urls.regular}}" [routerDirection]="'forward'" [routerLink]="['/photo',pic.id]">
+		 	<ion-card-content>
+		 		<ion-grid>
+		 			<ion-row>
+		 				<ion-col class="under-pic">
+		 					<i class="fas fa-heart"></i><span>{{pic.likes}}</span>
+		 				</ion-col>
+		 				<ion-col class="under-pic">
+		 					<time>{{toDate(pic.updated_at)}}</time>
+		 				</ion-col>
+		 				<ion-col class="under-pic">
+		 					<div text-end>
+		 					{{pic.height}} x {{pic.width}}
+		 					</div>
+		 				</ion-col>
+		 			</ion-row>
+		 		</ion-grid>
+		 	</ion-card-content>
+	 	</ion-card>
 
+	    <ion-grid *ngIf="more">
+	      <ion-row align-items-center>
+	        <ion-col >
+	          <ion-button  color="light" (click)="clickButton()">More</ion-button>
+	        </ion-col>
+	      </ion-row>
+	    </ion-grid>
+	</div>
+	<div *ngIf="!profile">
+		<ion-spinner name="crescent" class="spinner"></ion-spinner>
+	</div>
+</ion-scroll>
 </ion-content>

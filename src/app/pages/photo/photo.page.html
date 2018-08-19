@@ -1,53 +1,48 @@
 <ion-header>
   <ion-toolbar color="dark">
-    	<ion-icon color="secondary" name="arrow-back" class="arrow-back"></ion-icon>
+    	<ion-icon color="secondary" name="arrow-back" class="arrow-back" [routerDirection]="'back'" [routerLink]="['/']" ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="pic" color="dark">
-	<ion-card>
-	  <ion-img src="{{pic.urls.regular}}" [routerDirection]="'root'" [routerLink]="['/photo',pic.id,'fullimage']"></ion-img>
-
-	  <ion-card-content>
-		<ion-grid>
-		  <ion-row >
-		    <ion-col no-margin no-padding >
-		    	<ion-list>
-		    		<ion-item>	
-					    <ion-avatar slot="start">
-					      <ion-img src="{{pic.user.profile_image.small}}"></ion-img>
-					    </ion-avatar>
-					    <ion-label>
-					      <h2><a href="{{pic.user.links.html}}">{{pic.user.name}}</a></h2>
-					      <p>{{pic.user.bio}}</p>
-					    </ion-label>
-		    		</ion-item>	
-		    	</ion-list>	
-		    </ion-col>
-		    <ion-col>
-		  		<ion-list>
-		    		<ion-item>	
-					   <ion-icon name="cloud-download"></ion-icon>
-					   <span class="photo-info">{{pic.downloads}}</span>
-		    		</ion-item>
-		    		<ion-item>	
-					   <ion-icon name="heart"></ion-icon>{{' '}}
-					   <span class="photo-info">{{pic.likes}}</span>
-		    		</ion-item>	
-		    		<ion-item>	
-		    			<ion-icon name="eye"></ion-icon>{{' '}}
-					   <span class="photo-info">{{pic.views}}</span>
-		    		</ion-item>		
-		    	</ion-list>	
-		  	</ion-col>
-		    <ion-col>
-		  		<ion-button color="success" (click)="downloadthis()">
-		  			Download
-					<ion-icon name="download"></ion-icon>
-		  		</ion-button>
-		  	</ion-col>
-		  </ion-row>
-		</ion-grid>
-	  </ion-card-content>
-	</ion-card>
+<ion-content  color="dark">
+	<ion-card *ngIf="pic">
+			<ion-list>
+			  <ion-item color="dark">
+			    <ion-avatar slot="start">
+			      <ion-img src="{{pic.user.profile_image.medium}}" [routerDirection]="'forward'" [routerLink]="['/profile',pic.id,pic.user.username]"></ion-img>
+			    </ion-avatar>
+			    <ion-label>
+			      <h2 class="under-pic" [routerDirection]="'forward'" [routerLink]="['/profile',pic.id,pic.user.username]">{{pic.user.name}} </h2>
+			    </ion-label>
+			     <time text-end>{{update_at}}</time>
+			  </ion-item>
+			</ion-list>
+	      <ion-img src="{{pic.urls.regular}}" [routerDirection]="'forward'" [routerLink]="['/photo',pic.id,'fullimage']"></ion-img>
+	 	<ion-card-content>
+	 		<ion-grid>
+		 		<ion-row>
+		 			<ion-col class="under-pic" size="2">
+		 				<i class="fas fa-heart"></i><span>{{pic.likes}}</span>
+					</ion-col>
+		 			<ion-col class="under-pic" size="2">
+		 				<i class="fas fa-download"></i><span>{{pic.downloads}}</span>
+		 			</ion-col>
+		 			<ion-col class="under-pic" size="2">
+		 				<i class="fas fa-eye"></i><span>{{pic.views}}</span>
+		 			</ion-col>
+		 			<ion-col class="under-pic">
+						<div text-center>
+		 					{{pic.height}} x {{pic.width}}
+		 				</div>
+		 			</ion-col>
+		 			<ion-col class="under-pic" size="2" text-end  (click)="downloadthis()">
+		 				<ion-icon name="download" class="download"></ion-icon>
+		 			</ion-col>
+		 		</ion-row>
+		 	</ion-grid>
+		</ion-card-content>
+ 	</ion-card>
+ 	<div *ngIf="pic">
+ 		<ion-spinner name="crescent" class="spinner"></ion-spinner>
+ 	</div>
 </ion-content>

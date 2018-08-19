@@ -9,15 +9,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding color="dark">
-	<form (submit)="search(name.value)" fixed>  
-	    <ion-searchbar #name></ion-searchbar>
-	 </form>
+<ion-content padding color="dark" [scrollEvents]="true" [scrollEvents]="true"
+  (ionScrollStart)="logScrollStart()"
+  (ionScrollEnd)="logScrollEnd()">
+  <ion-fab vertical="bottom" horizontal="end"  slot="fixed" *ngIf="scroll_fab">
+        <ion-fab-button (click)="scrollToTop()">
+          <ion-icon name="arrow-dropup-circle"></ion-icon>
+        </ion-fab-button>
+  </ion-fab>
+   <ion-scroll #scroll scrollY="true">
+	     <ion-searchbar [(ngModel)]="nom" (ngModelChange)="search(nom)"></ion-searchbar>
     <div *ngIf="categories">
       <ion-grid >
           <ion-row align-items-center *ngFor="let categorie of categories">
             <ion-col>
-              <ion-card [routerDirection]="'root'" [routerLink]="['/categorie',categorie.id]">
+              <ion-card [routerDirection]="'forward'" [routerLink]="['/categorie',categorie.id]">
                 <ion-grid  >
                   <ion-row>
                     <ion-col>
@@ -36,9 +42,9 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-                <ion-card-content>
-                  <ion-card-title>{{categorie.title}}</ion-card-title>
-                  <span *ngFor="let tag of categorie.tags">#{{tag.title}} ,</span>
+                <ion-card-content class="categorie-info">
+                  <ion-card-title><span class="categorie-info-title">{{categorie.title}}</span></ion-card-title>
+                  <span *ngFor="let tag of categorie.tags">#{{tag.title}}</span>
 
                   <h6>{{categorie.total_photos}} photos</h6>
                 </ion-card-content>
@@ -56,6 +62,7 @@
         </ion-grid>
       </div>
       <div *ngIf="!categories" >
-        <h2>loading data</h2>
+        <ion-spinner name="crescent" class="spinner"></ion-spinner>
       </div>
+    </ion-scroll>
 </ion-content>

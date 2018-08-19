@@ -1,7 +1,7 @@
 <ion-content  *ngIf="pic" color="dark">
 	<div *ngIf="show">
 		 <ion-fab vertical="top" horizontal="start" slot="fixed" >
-		    <ion-fab-button color="light">
+		    <ion-fab-button color="light"  [routerDirection]="'back'" [routerLink]="['/photo',pic.id]">
 		      <ion-icon name="arrow-round-back"></ion-icon>
 		    </ion-fab-button>
 		</ion-fab>

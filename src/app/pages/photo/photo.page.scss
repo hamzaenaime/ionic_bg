@@ -1,14 +1,17 @@
-.photo-info{
-	font-size:12px;
+.under-pic{
+	color:white;
 }
 
-.arrow-back{
-	padding-left:5px;
-	padding-right:5px;
-	width:30px;
-	height:30px;
+.under-pic >span{
+	padding-left:15px;
 }
 
-.arrow-back:hover{
-	background-color:#140A1F;
+.under-pic >div{
+	font-size:14px;
+}
+.download{
+	font-size:24px;
+}
+.download:hover{
+	cursor:pointer;
 }

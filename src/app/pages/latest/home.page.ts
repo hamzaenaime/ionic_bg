@@ -1,33 +1,30 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component ,ViewChild } from '@angular/core';
 import { PhotosProvider } from '../../providers/photos';
 
 import { Content , NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-popular',
-  templateUrl: './popular.page.html',
-  styleUrls: ['./popular.page.scss'],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class PopularPage implements OnInit {
+export class HomePage {
+	@ViewChild('scroll') scroll: any;
 	pics:any;
 	page;
-	@ViewChild('scroll') scroll: any;
 	scroll_fab:boolean;
-	constructor(private photosProvider:PhotosProvider,public navCtrl:NavController){
-		this.page=1;
+	constructor(private photosProvider:PhotosProvider , public navCtrl:NavController){
 		this.scroll_fab=false;
-		this.photosProvider.getPhotos(this.page,"popular").then(photos=>{
+		this.page=1;
+		this.photosProvider.getPhotos(this.page,"latest").then(photos=>{
 			this.pics = photos;
 		});
 	}
 	clickButton=()=>{
 		this.page++;
-		this.photosProvider.getPhotos(this.page,"popular").then(photos=>{
+		this.photosProvider.getPhotos(this.page,"latest").then(photos=>{
 			this.pics = [...this.pics,...photos];
 		});
-	}
-	ngOnInit(){
-
 	}
 	scrollToTop=()=> {
 	   	this.scroll.nativeElement.scrollTop=0;
@@ -42,3 +39,4 @@ export class PopularPage implements OnInit {
 	logScrollEnd(){this.log();}
 	logScrollStart(){this.log();}
 }
+

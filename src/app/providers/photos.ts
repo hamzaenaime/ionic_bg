@@ -56,8 +56,13 @@ export class PhotosProvider {
 		return this.unsplash.collections.listCollections(page, 10, "popular")
 		  .then(res=>res.json());
 	}
-	getProfile=()=>{
-		return this.unsplash.users.profile("naoufal")
+	getProfile=(username)=>{
+		return this.unsplash.users.profile(username)
+		  .then(res=>res.json());
+	}
+
+	getUserPhotos=(username,page)=>{
+		return this.unsplash.users.photos(username,page, 10, "latest")
 		  .then(res=>res.json());
 	}
 }

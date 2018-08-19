@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { PhotosProvider } from '../../providers/photos';
 
 @Component({
@@ -7,13 +7,16 @@ import { PhotosProvider } from '../../providers/photos';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements OnInit {
+	 @ViewChild('scroll') scroll: any;
 	categories:any;
 	page;
 	pageS;
 	name;
 	searching:boolean;
+	scroll_fab:boolean;
 
 	constructor(private photosProvider:PhotosProvider){
+		this.scroll_fab=false;
 		this.searching=false;
 		this.page=1;
 		this.pageS=1;
@@ -45,4 +48,16 @@ export class CategoriesPage implements OnInit {
 			this.categories = categories.results;
 		});
 	}
+	scrollToTop=()=> {
+	   	this.scroll.nativeElement.scrollTop=0;
+	}
+	log(){
+		if(this.scroll.nativeElement.scrollTop>=1000){
+			this.scroll_fab=true;
+		}else{
+			this.scroll_fab=false;
+		}
+	}
+	logScrollEnd(){this.log();}
+	logScrollStart(){this.log();}
 }
