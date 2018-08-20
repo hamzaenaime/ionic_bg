@@ -38,5 +38,15 @@ export class HomePage {
 	}
 	logScrollEnd(){this.log();}
 	logScrollStart(){this.log();}
+  	goTo=(url)=>{
+  		console.log(url);
+	    this.navCtrl.stack.push(url);
+	    this.navCtrl.goForward(url);
+  	}
+
+ 	goBack=()=>{
+	    this.navCtrl.stack.pop();
+	    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length-1]);
+  	}
 }
 

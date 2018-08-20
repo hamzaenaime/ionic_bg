@@ -1,15 +1,18 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu >
+    <ion-menu>
       <ion-header>
         <ion-toolbar color="dark">
           <ion-title color="warning">Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content color="dark">
-        <ion-list >
+        <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <!--
             <ion-item [routerDirection]="'forward'" [routerLink]="[p.url]" color="dark">
+            -->
+            <ion-item (click)="goTo(p.url)" color="dark">
               <ion-icon color="secondary" slot="start" [name]="p.icon"></ion-icon>
               <ion-label color="warning">
                 {{p.title}}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -11,9 +11,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Search',
+      title: 'Home',
       url: '/',
-      icon: 'search'
+      icon: 'home'
     },
     {
       title: 'Latest Pics',
@@ -35,15 +35,17 @@ export class AppComponent {
       url: '/about',
       icon: 'information'
     }
-    
+
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public navCtrl: NavController
   ) {
     this.initializeApp();
+    this.navCtrl.stack.push(this.appPages[0].url);
   }
 
   initializeApp() {
@@ -52,4 +54,15 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  goTo = (url) => {
+    this.navCtrl.stack.push(url);
+    this.navCtrl.goForward(url);
+  }
+
+  goBack = () => {
+    this.navCtrl.stack.pop();
+    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
+  }
 }
+

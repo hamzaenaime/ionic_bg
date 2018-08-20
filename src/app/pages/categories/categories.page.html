@@ -1,68 +1,83 @@
-<ion-header >
+<ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title color="warning">
-      Categories
-    </ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-title color="warning">
+            Categories
+          </ion-title>
+        </ion-col>
+        <ion-col>
+          <div *ngIf="show_search">
+            <ion-searchbar [(ngModel)]="nom" (ngModelChange)="search(nom)"></ion-searchbar>
+          </div>
+          <div *ngIf="!show_search" text-end (click)="clickSearch()" class="search-icon">
+            <ion-icon name="search" color="warning"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding color="dark" [scrollEvents]="true" [scrollEvents]="true"
-  (ionScrollStart)="logScrollStart()"
-  (ionScrollEnd)="logScrollEnd()">
-  <ion-fab vertical="bottom" horizontal="end"  slot="fixed" *ngIf="scroll_fab">
-        <ion-fab-button (click)="scrollToTop()">
-          <ion-icon name="arrow-dropup-circle"></ion-icon>
-        </ion-fab-button>
+<ion-content padding color="dark" [scrollEvents]="true" [scrollEvents]="true" (ionScrollStart)="logScrollStart()" (ionScrollEnd)="logScrollEnd()">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="scroll_fab">
+    <ion-fab-button (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup-circle"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
-   <ion-scroll #scroll scrollY="true">
-	     <ion-searchbar [(ngModel)]="nom" (ngModelChange)="search(nom)"></ion-searchbar>
+
+
+  <ion-scroll #scroll scrollY="true">
     <div *ngIf="categories">
-      <ion-grid >
-          <ion-row align-items-center *ngFor="let categorie of categories">
-            <ion-col>
-              <ion-card [routerDirection]="'forward'" [routerLink]="['/categorie',categorie.id]">
-                <ion-grid  >
-                  <ion-row>
-                    <ion-col>
-                      <img src="{{categorie.preview_photos[0].urls.small}}" height="300" width="42">
-                    </ion-col>
-                    <ion-col>
-                      <img src="{{categorie.preview_photos[1].urls.small}}" height="300" width="42">
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col>
-                      <img src="{{categorie.preview_photos[2].urls.small}}" height="300" width="42">
-                    </ion-col>
-                    <ion-col>
-                      <img src="{{categorie.preview_photos[3].urls.small}}" height="300" width="42">
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-                <ion-card-content class="categorie-info">
-                  <ion-card-title><span class="categorie-info-title">{{categorie.title}}</span></ion-card-title>
-                  <span *ngFor="let tag of categorie.tags">#{{tag.title}}</span>
+      <ion-grid>
+        <ion-row align-items-center *ngFor="let categorie of categories">
+          <ion-col>
+            <ion-card (click)="goTo('/categorie/'+categorie.id)">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <img src="{{categorie.preview_photos[0].urls.small}}" height="300" width="42">
+                  </ion-col>
+                  <ion-col>
+                    <img src="{{categorie.preview_photos[1].urls.small}}" height="300" width="42">
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <img src="{{categorie.preview_photos[2].urls.small}}" height="300" width="42">
+                  </ion-col>
+                  <ion-col>
+                    <img src="{{categorie.preview_photos[3].urls.small}}" height="300" width="42">
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-card-content class="categorie-info">
+                <ion-card-title>
+                  <span class="categorie-info-title">{{categorie.title}}</span>
+                </ion-card-title>
+                <span *ngFor="let tag of categorie.tags">#{{tag.title}}</span>
 
-                  <h6>{{categorie.total_photos}} photos</h6>
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+                <h6>{{categorie.total_photos}} photos</h6>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-        <ion-grid>
-          <ion-row align-items-center>
-            <ion-col *ngIf="!searching">
-              <ion-button  color="light" (click)="clickButton()">More</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-      <div *ngIf="!categories" >
-        <ion-spinner name="crescent" class="spinner"></ion-spinner>
-      </div>
-    </ion-scroll>
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col *ngIf="!searching">
+            <ion-button color="light" (click)="clickButton()">More</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="!categories">
+      <ion-spinner name="crescent" class="spinner"></ion-spinner>
+    </div>
+  </ion-scroll>
 </ion-content>

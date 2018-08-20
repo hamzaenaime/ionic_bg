@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotosProvider } from '../../providers/photos';
 import { ActivatedRoute } from '@angular/router';
+import { Content , NavController } from '@ionic/angular';
+
 
 
 @Component({
@@ -12,7 +14,7 @@ export class PhotoPage implements OnInit {
 	pic:any;
 	id;
 	update_at:string;
-	constructor(private photosProvider:PhotosProvider,private _Activatedroute:ActivatedRoute){
+	constructor(private photosProvider:PhotosProvider,private _Activatedroute:ActivatedRoute,public navCtrl:NavController){
 		_Activatedroute.params.subscribe(params => this.id = params['id']);
 		this.photosProvider.getPhoto(this.id).then(photo=>{
 			this.pic = photo;
@@ -29,4 +31,18 @@ export class PhotoPage implements OnInit {
 	ngOnInit(){
 
 	}
+
+	goTo=(url)=>{
+  		console.log(url);
+	    this.navCtrl.stack.push(url);
+	    this.navCtrl.goForward(url);
+  	}
+
+ 	goBack=()=>{
+	    this.navCtrl.stack.pop();
+	    this.navCtrl.stack.pop();
+	    this.navCtrl.stack.pop();
+ 		console.log(this.navCtrl.stack);
+	    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length-1]);
+  	}
 }

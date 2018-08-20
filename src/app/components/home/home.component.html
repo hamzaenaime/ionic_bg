@@ -1,0 +1,25 @@
+<div>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let c of components" (click)="swap(c.title)">
+        <div class="{{c.class}}">
+          <div class="text" text-center>
+            {{c.title}}
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="pics">
+    <ion-grid>
+      <ion-row align-items-center *ngFor="let pic of pics">
+        <ion-col>
+          <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="!pics">
+    <ion-spinner name="crescent" class="spinner"></ion-spinner>
+  </div>
+</div>

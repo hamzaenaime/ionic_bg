@@ -41,4 +41,18 @@ export class PopularPage implements OnInit {
 	}
 	logScrollEnd(){this.log();}
 	logScrollStart(){this.log();}
+
+  	goTo=(url)=>{
+  		console.log(url);
+	    this.navCtrl.stack.push(url);
+	    this.navCtrl.goForward(url);
+  	}
+
+ 	goBack=()=>{
+	    this.navCtrl.stack.pop();
+	    this.navCtrl.stack.pop();
+	    this.navCtrl.stack.pop();
+ 		console.log(this.navCtrl.stack);
+	    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length-1]);
+  	}
 }

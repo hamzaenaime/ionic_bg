@@ -24,7 +24,10 @@
   <ion-grid >
       <ion-row align-items-center *ngFor="let pic of pics">
         <ion-col>
+          <!--
           <img class="home-imgs" src="{{pic.urls.small}}" [routerDirection]="'forward'" [routerLink]="['/photo',pic.id]">
+          -->
+          <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)" >
         </ion-col>
       </ion-row>
     </ion-grid>

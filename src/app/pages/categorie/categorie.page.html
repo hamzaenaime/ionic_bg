@@ -1,65 +1,71 @@
 <ion-header>
   <ion-toolbar color="dark">
-      <ion-title *ngIf="info" color="warning">
-        <ion-icon color="secondary" name="arrow-back" class="arrow-back" [routerDirection]="'back'" [routerLink]="['/categories']" ></ion-icon>
-        <span class="name">
-          {{info.title}}
-        </span>
+    <ion-title *ngIf="info" color="warning">
+      <ion-icon color="secondary" name="arrow-back" class="arrow-back" (click)="goBack()"></ion-icon>
+      <span class="name">
+        {{info.title}}
+      </span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="photos" color="dark" [scrollEvents]="true" [scrollEvents]="true"
-  (ionScrollStart)="logScrollStart()"
+<ion-content *ngIf="photos" color="dark" [scrollEvents]="true" [scrollEvents]="true" (ionScrollStart)="logScrollStart()"
   (ionScrollEnd)="logScrollEnd()">
-  <ion-fab vertical="bottom" horizontal="end"  slot="fixed" *ngIf="scroll_fab">
-          <ion-fab-button (click)="scrollToTop()">
-            <ion-icon name="arrow-dropup-circle"></ion-icon>
-          </ion-fab-button>
-    </ion-fab>
-    <ion-scroll #scroll scrollY="true">
-  <ion-grid *ngIf="info">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="scroll_fab">
+    <ion-fab-button (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-scroll #scroll scrollY="true">
+    <ion-grid *ngIf="info">
       <ion-row align-items-center>
         <ion-col size="4" text-center>
           <img class="cover-img" src="{{info.cover_photo.urls.thumb}}">
         </ion-col>
-        <ion-col class="info" >
-          <strong >Photos</strong>
+        <ion-col class="info">
+          <strong>Photos</strong>
           <div class="label">
-            {{info.total_photos}} 
+            {{info.total_photos}}
           </div>
         </ion-col>
-        <ion-col class="info" >
-          <strong >Published at</strong>
+        <ion-col class="info">
+          <strong>Published at</strong>
           <div class="label">
-            {{date}} 
+            {{date}}
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <div class="username">
-            <div class="user" >{{info.title}}</div>
+            <div class="user">{{info.title}}</div>
             <div class="item" *ngIf="info.description">{{info.description}}</div>
-            <div class="item">By : <a href="{{info.user.self}}" class="href">{{info.user.name}}</a></div>
+            <div class="item">By :
+              <div (click)="goTo('/profile/'+info.user.username)" class="href">{{info.user.name}}</div>
+            </div>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
-  <ion-card *ngFor="let pic of photos">
-          <img class="home-imgs" src="{{pic.urls.regular}}" [routerDirection]="'forward'" [routerLink]="['/photo',pic.id]">
+    <ion-card *ngFor="let pic of photos">
+      <img class="home-imgs" src="{{pic.urls.regular}}" (click)="goTo('/photo/'+pic.id)">
       <ion-card-content>
         <ion-grid>
           <ion-row>
+            <ion-col class="under-pic" (click)="like(pic.id)" size="2">
+              <ion-icon name="checkmark" *ngIf="liked(pic.id)" color="success" style="font-size: 25px;"></ion-icon>
+              <ion-icon name="add" *ngIf="!liked(pic.id)" style="font-size: 25px;"></ion-icon>
+            </ion-col>
             <ion-col class="under-pic">
-              <i class="fas fa-heart"></i><span>{{pic.likes}}</span>
+              <i class="fas fa-heart" color="danger"></i>
+              <span>{{pic.likes}}</span>
             </ion-col>
             <ion-col class="under-pic">
               <time>{{toDate(pic.updated_at)}}</time>
             </ion-col>
             <ion-col class="under-pic">
               <div text-end>
-              {{pic.height}} x {{pic.width}}
+                {{pic.height}} x {{pic.width}}
               </div>
             </ion-col>
           </ion-row>
@@ -67,12 +73,12 @@
       </ion-card-content>
     </ion-card>
 
-      <ion-grid *ngIf="more">
-        <ion-row align-items-center>
-          <ion-col >
-            <ion-button  color="light" (click)="clickButton()">More</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-scroll>
+    <ion-grid *ngIf="more">
+      <ion-row align-items-center>
+        <ion-col>
+          <ion-button color="light" (click)="clickButton()">More</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-scroll>
 </ion-content>
