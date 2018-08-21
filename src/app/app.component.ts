@@ -1,41 +1,40 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { Platform, NavController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform, NavController } from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+  selector: "app-root",
+  templateUrl: "app.component.html"
 })
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: '/',
-      icon: 'home'
+      title: "Home",
+      url: "/",
+      icon: "home"
     },
     {
-      title: 'Latest Pics',
-      url: '/latest',
-      icon: 'time'
+      title: "Latest Pics",
+      url: "/latest",
+      icon: "time"
     },
     {
-      title: 'Popular',
-      url: '/popular',
-      icon: 'star'
+      title: "Popular",
+      url: "/popular",
+      icon: "star"
     },
     {
-      title: 'Categories',
-      url: '/categories',
-      icon: 'filing'
+      title: "Categories",
+      url: "/categories",
+      icon: "filing"
     },
     {
-      title: 'About',
-      url: '/about',
-      icon: 'information'
+      title: "About",
+      url: "/about",
+      icon: "information"
     }
-
   ];
 
   constructor(
@@ -55,14 +54,13 @@ export class AppComponent {
     });
   }
 
-  goTo = (url) => {
+  goTo = url => {
     this.navCtrl.stack.push(url);
     this.navCtrl.goForward(url);
-  }
+  };
 
   goBack = () => {
     this.navCtrl.stack.pop();
     this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
-  }
+  };
 }
-

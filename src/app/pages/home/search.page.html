@@ -6,13 +6,13 @@
 		<ion-grid>
 			<ion-row>
 				<ion-col>
-					<ion-title color="warning">
+					<ion-title color="warning" style="padding-top:10px;">
 						Beauty BG
 					</ion-title>
 				</ion-col>
 				<ion-col>
 					<div *ngIf="show_search">
-						<ion-searchbar [(ngModel)]="nom" (ngModelChange)="search(nom)"></ion-searchbar>
+						<ion-searchbar color="dark" autocorrect="on" [(ngModel)]="nom" (ngModelChange)="search(nom)"></ion-searchbar>
 					</div>
 					<div *ngIf="!show_search" text-end (click)="clickSearch()" class="search-icon">
 						<ion-icon name="search" color="warning"></ion-icon>
@@ -47,7 +47,7 @@
 				</ion-row>
 			</ion-grid>
 		</div>
-		<div *ngIf="!pics">
+		<div *ngIf="!name">
 			<app-home></app-home>
 		</div>
 	</ion-scroll>

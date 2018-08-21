@@ -1,14 +1,31 @@
-.cols{
-    color:grey;
+.cols {
+  color: grey;
 }
 
-.current{
-    border-bottom:3px #7044ff solid;
-    background-color: #373d4a;
-    color:white;
+.current {
+  border-bottom: 3px #7044ff solid;
+  background-color: #373d4a;
+  color: white;
 }
 
-.text{
-    padding-bottom: 8px;
-    padding-top: 11px;
+.text {
+  padding-bottom: 8px;
+  padding-top: 11px;
+}
+
+.title {
+  padding-left: 15px;
+  padding-right: 5px;
+  font-size: 25px;
+  color: #eece1a;
+}
+
+.username {
+  padding-left: 5px;
+  color: #10dc60;
+}
+
+.categorie-info {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }

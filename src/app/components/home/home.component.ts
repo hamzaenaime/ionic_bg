@@ -1,88 +1,128 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { PhotosProvider } from '../../providers/photos';
+import { Component, ViewChild, OnInit } from "@angular/core";
+import { PhotosProvider } from "../../providers/photos";
 
-import { NavController } from '@ionic/angular';
+import { NavController } from "@ionic/angular";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
   public components = [
     {
-      title: 'Popular',
-      class: 'current',
-      open: true
-    },
-    {
-      title: 'Latest',
-      class: 'cols',
+      title: "Popular",
+      class: "cols",
       open: false
     },
     {
-      title: 'Favorites',
-      class: 'cols',
+      title: "Latest",
+      class: "cols",
+      open: false
+    },
+    {
+      title: "Categories",
+      class: "cols",
+      open: false
+    },
+    {
+      title: "Favorites",
+      class: "cols",
       open: false
     }
   ];
   label: string;
   favorites: any;
-  @ViewChild('scroll') scroll: any;
-  pics: any;
+  @ViewChild("scroll")
+  scroll: any;
   page;
   scroll_fab: boolean;
   storage: any;
   key: string;
-  constructor(private photosProvider: PhotosProvider, public navCtrl: NavController) {
-    this.label = 'popular';
+  categories: any;
+  latest: any;
+  popular: any;
+  slideOpts = {
+    effect: "flip"
+  };
+  constructor(
+    private photosProvider: PhotosProvider,
+    public navCtrl: NavController
+  ) {
+    this.label = "welcome";
     this.scroll_fab = false;
     this.favorites = [];
-    this.page = 1;
     this.storage = window.localStorage;
+  }
+  ionWillEnter() {
     this.photosProvider.getPhotos(this.page, this.label).then(photos => {
-      this.pics = photos;
+      this.popular = photos;
+      console.log(this.popular);
     });
   }
-
-  ngOnInit() {
-  }
-  swap = (title) => {
-    this.label = title;
-    this.components.map(c => {
-      if (c.title === title) {
-        c.class = 'current';
-        c.open = true;
-      } else {
-        c.class = 'cols';
-        c.open = false;
-      }
-    });
-    if (this.label !== 'Favorites') {
-      this.photosProvider.getPhotos(this.page, this.label).then(photos => {
-        this.pics = photos;
+  ngOnInit() {}
+  swap = title => {
+    if (this.label !== title) {
+      this.label = title;
+      this.components.map(c => {
+        if (c.title === title) {
+          c.class = "current";
+          c.open = true;
+        } else {
+          c.class = "cols";
+          c.open = false;
+        }
       });
-    } else {
-      for (let i = 0; i < this.storage.length; i++) {
-        this.key = this.storage.key(i);
-        this.photosProvider.getPhoto(this.storage.getItem(this.key)).then(photo => {
-          this.favorites.push(photo);
+      if (this.label === "Popular") {
+        this.page = 1;
+        this.photosProvider.getPhotos(this.page, this.label).then(photos => {
+          this.popular = photos;
         });
+      } else if (this.label === "Latest") {
+        this.page = 1;
+        this.photosProvider.getPhotos(this.page, this.label).then(photos => {
+          this.latest = photos;
+        });
+      } else if (this.label === "Categories") {
+        this.page = 1;
+        this.photosProvider.getCollections(1).then(categories => {
+          this.categories = categories;
+          console.log(categories);
+        });
+      } else {
+        for (let i = 0; i < this.storage.length; i++) {
+          this.key = this.storage.key(i);
+          this.photosProvider
+            .getPhoto(this.storage.getItem(this.key))
+            .then(photo => {
+              this.favorites.push(photo);
+            });
+        }
+        //this.pics = this.favorites;
       }
-      this.pics = this.favorites;
     }
-  }
-
+  };
 
   clickButton = () => {
     this.page++;
-    this.photosProvider.getPhotos(this.page, "latest").then(photos => {
-      this.pics = [...this.pics, ...photos];
-    });
-  }
+    console.log(this.page);
+    if (this.label === "Popular") {
+      this.photosProvider.getPhotos(this.page, this.label).then(popular => {
+        this.popular = [...this.popular, ...popular];
+      });
+    } else if (this.label === "Latest") {
+      this.photosProvider.getPhotos(this.page, this.label).then(latest => {
+        this.latest = [...this.latest, ...latest];
+      });
+    } else if (this.label === "Categories") {
+      this.photosProvider.getCollections(this.page).then(categories => {
+        this.categories = [...this.categories, ...categories];
+      });
+    }
+  };
   scrollToTop = () => {
     this.scroll.nativeElement.scrollTop = 0;
-  }
+  };
   log() {
     if (this.scroll.nativeElement.scrollTop >= 1000) {
       this.scroll_fab = true;
@@ -90,20 +130,20 @@ export class HomeComponent implements OnInit {
       this.scroll_fab = false;
     }
   }
-  logScrollEnd() { this.log(); }
-  logScrollStart() { this.log(); }
-  goTo = (url) => {
+  logScrollEnd() {
+    this.log();
+  }
+  logScrollStart() {
+    this.log();
+  }
+  goTo = url => {
     console.log(url);
     this.navCtrl.stack.push(url);
     this.navCtrl.goForward(url);
-  }
+  };
 
   goBack = () => {
     this.navCtrl.stack.pop();
     this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
-  }
-
+  };
 }
-
-
-

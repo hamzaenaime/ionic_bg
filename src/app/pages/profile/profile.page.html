@@ -19,19 +19,6 @@
 						<img class="profile-img" src="{{profile.profile_image.large}}">
 					</ion-col>
 					<ion-col class="info">
-						<strong>downloads</strong>
-						<div class="label">
-							{{profile.downloads}}
-						</div>
-					</ion-col>
-					<ion-col class="info">
-						<div></div>
-						<strong>likes</strong>
-						<div class="label">
-							{{profile.total_likes}}
-						</div>
-					</ion-col>
-					<ion-col class="info">
 						<strong>images</strong>
 						<div class="label">
 							{{profile.total_photos}}
@@ -83,6 +70,10 @@
 				<ion-card-content>
 					<ion-grid>
 						<ion-row>
+							<ion-col class="under-pic" (click)="like(pic.id)" size="2">
+								<ion-icon name="checkmark" *ngIf="liked(pic.id)" color="success" style="font-size: 25px;"></ion-icon>
+								<ion-icon name="add" *ngIf="!liked(pic.id)" style="font-size: 25px;"></ion-icon>
+							</ion-col>
 							<ion-col class="under-pic">
 								<i class="fas fa-heart"></i>
 								<span>{{pic.likes}}</span>

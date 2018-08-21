@@ -10,16 +10,89 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div *ngIf="pics">
-    <ion-grid>
-      <ion-row align-items-center *ngFor="let pic of pics">
-        <ion-col>
-          <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <div *ngIf="label == 'welcome'">
+    <h1>welcome</h1>
   </div>
-  <div *ngIf="!pics">
-    <ion-spinner name="crescent" class="spinner"></ion-spinner>
+  <div *ngIf="label == 'Popular'">
+    <div *ngIf="popular">
+      <ion-grid>
+        <ion-row align-items-center *ngFor="let pic of popular">
+          <ion-col no-padding no-margin>
+            <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col>
+            <ion-button color="light" (click)="clickButton()">More</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="!popular">
+      <ion-spinner name="crescent" class="spinner"></ion-spinner>
+    </div>
+  </div>
+  <div *ngIf="label == 'Latest'">
+    <div *ngIf="latest">
+      <ion-grid>
+        <ion-row align-items-center *ngFor="let pic of latest">
+          <ion-col no-padding no-margin>
+            <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col>
+            <ion-button color="light" (click)="clickButton()">More</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="!latest">
+      <ion-spinner name="crescent" class="spinner"></ion-spinner>
+    </div>
+  </div>
+  <div *ngIf="label == 'Categories'">
+    <div *ngIf="categories">
+      <div *ngFor="let categorie of  categories">
+        <div class="categorie-info">
+          <span class="title" (click)="goTo('/categorie/'+categorie.id)">{{categorie.title}}</span>
+          <span>by </span>
+          <span class="username" (click)="goTo('/profile/'+categorie.user.username)">{{categorie.user.name}}</span>
+        </div>
+        <ion-slides pager="true" (click)="goTo('/categorie/'+categorie.id)">
+          <ion-slide *ngFor="let pic of categorie.preview_photos" style="width: 400px;height: 300px;">
+            <img class="home-imgs" src="{{pic.urls.small}}" style="width: auto;height:100%">
+          </ion-slide>
+        </ion-slides>
+      </div>
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col>
+            <ion-button color="light" (click)="clickButton()">More</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="!categories">
+      <ion-spinner name="crescent" class="spinner"></ion-spinner>
+    </div>
+  </div>
+  <div *ngIf="label == 'Favorites'">
+    <div *ngIf="favorites">
+      <ion-grid>
+        <ion-row align-items-center *ngFor="let pic of favorites">
+          <ion-col no-padding no-margin>
+            <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="!favorites">
+      <ion-spinner name="crescent" class="spinner"></ion-spinner>
+    </div>
   </div>
 </div>

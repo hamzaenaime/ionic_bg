@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -9,33 +9,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding color="dark" [scrollEvents]="true" [scrollEvents]="true"
-  (ionScrollStart)="logScrollStart()"
-  (ionScrollEnd)="logScrollEnd()">
-  <ion-fab vertical="bottom" horizontal="end"  slot="fixed" *ngIf="scroll_fab">
-        <ion-fab-button (click)="scrollToTop()">
-          <ion-icon name="arrow-dropup-circle"></ion-icon>
-        </ion-fab-button>
+<ion-content padding color="dark" [scrollEvents]="true" [scrollEvents]="true" (ionScrollStart)="logScrollStart()" (ionScrollEnd)="logScrollEnd()">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="scroll_fab">
+    <ion-fab-button (click)="scrollToTop()">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
-   <ion-scroll #scroll scrollY="true">
-  <div *ngIf="pics">
-  <ion-grid >
-      <ion-row align-items-center *ngFor="let pic of pics">
-        <ion-col>
-          <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-scroll #scroll scrollY="true">
+    <div *ngIf="pics">
+      <ion-grid>
+        <ion-row align-items-center *ngFor="let pic of pics">
+          <ion-col no-padding no-margin>
+            <img class="home-imgs" src="{{pic.urls.small}}" (click)="goTo('/photo/'+pic.id)">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-    <ion-grid>
-      <ion-row align-items-center>
-        <ion-col >
-          <ion-button  color="light" (click)="clickButton()">More</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-    <div *ngIf="!pics" >
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col>
+            <ion-button color="light" (click)="clickButton()">More</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="!pics">
       <ion-spinner name="crescent" class="spinner"></ion-spinner>
     </div>
   </ion-scroll>
