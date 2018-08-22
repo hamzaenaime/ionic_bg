@@ -3,6 +3,8 @@ import { PhotosProvider } from "../../providers/photos";
 
 import { Content, NavController } from "@ionic/angular";
 
+import { HistoryProvider } from "../../providers/history";
+
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",
@@ -16,7 +18,8 @@ export class HomePage {
   scroll_fab: boolean;
   constructor(
     private photosProvider: PhotosProvider,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public history: HistoryProvider
   ) {
     this.scroll_fab = false;
     this.page = 1;
@@ -47,13 +50,15 @@ export class HomePage {
     this.log();
   }
   goTo = url => {
-    console.log(url);
-    this.navCtrl.stack.push(url);
+    //console.log(this.history.history);
+    this.history.history.unshift(url);
     this.navCtrl.goForward(url);
   };
 
   goBack = () => {
-    this.navCtrl.stack.pop();
-    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
+    //console.log(this.history.history);
+    const url = this.history.history[0];
+    this.history.history.shift();
+    this.navCtrl.goBack(url);
   };
 }

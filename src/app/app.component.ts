@@ -4,6 +4,8 @@ import { Platform, NavController } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
+import { HistoryProvider } from "./providers/history";
+
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html"
@@ -29,22 +31,20 @@ export class AppComponent {
       title: "Categories",
       url: "/categories",
       icon: "filing"
-    },
-    {
-      title: "About",
-      url: "/about",
-      icon: "information"
     }
   ];
+  year: string;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public history: HistoryProvider
   ) {
     this.initializeApp();
-    this.navCtrl.stack.push(this.appPages[0].url);
+    //this.history.history.push("/");
+    this.year = new Date().getFullYear().toString();
   }
 
   initializeApp() {
@@ -55,12 +55,15 @@ export class AppComponent {
   }
 
   goTo = url => {
-    this.navCtrl.stack.push(url);
+    //console.log(this.history.history);
+    this.history.history.unshift(url);
     this.navCtrl.goForward(url);
   };
 
   goBack = () => {
-    this.navCtrl.stack.pop();
-    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
+    // console.log(this.history.history);
+    const url = this.history.history;
+    this.history.history.shift();
+    this.navCtrl.goBack(url);
   };
 }

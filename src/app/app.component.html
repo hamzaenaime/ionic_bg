@@ -2,25 +2,38 @@
   <ion-split-pane>
     <ion-menu>
       <ion-header>
-        <ion-toolbar color="dark">
-          <ion-title color="warning">Menu</ion-title>
+        <ion-toolbar color="primary">
+          <ion-title color="warning" text-center>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content color="dark">
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <!--
-            <ion-item [routerDirection]="'forward'" [routerLink]="[p.url]" color="dark">
-            -->
-            <ion-item (click)="goTo(p.url)" color="dark">
-              <ion-icon color="secondary" slot="start" [name]="p.icon"></ion-icon>
+      <ion-content class="menu-content">
+        <ion-list class="menu-content">
+          <ion-menu-toggle auto-hide="false">
+            <div *ngFor="let p of appPages">
+              <ion-item class="items" (click)="goTo(p.url)">
+                <ion-icon color="success" slot="start" [name]="p.icon"></ion-icon>
+                <ion-label color="warning">
+                  {{p.title}}
+                </ion-label>
+              </ion-item>
+            </div>
+            <ion-item (click)="goTo('/about')">
+              <ion-icon color="success" slot="start" name="information-circle-outline"></ion-icon>
               <ion-label color="warning">
-                {{p.title}}
+                About
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
       </ion-content>
+      <ion-footer>
+        <ion-toolbar color="primary">
+          <ion-title text-center class="menu-footer">{{year}} &copy;</ion-title>
+          <h4 class="sub" text-center>Powered By
+            <a href="https://unsplash.com">Unsplash</a>
+          </h4>
+        </ion-toolbar>
+      </ion-footer>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
   </ion-split-pane>

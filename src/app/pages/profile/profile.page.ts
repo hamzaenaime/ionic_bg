@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { PhotosProvider } from "../../providers/photos";
 import { ActivatedRoute } from "@angular/router";
 
+import { HistoryProvider } from "../../providers/history";
+
 import { NavController, ToastController } from "@ionic/angular";
 @Component({
   selector: "app-profile",
@@ -24,7 +26,8 @@ export class ProfilePage implements OnInit {
     private photosProvider: PhotosProvider,
     private _Activatedroute: ActivatedRoute,
     public navCtrl: NavController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public history: HistoryProvider
   ) {
     this.storage = window.localStorage;
     this.more = true;
@@ -74,17 +77,16 @@ export class ProfilePage implements OnInit {
     this.log();
   }
   goTo = url => {
-    console.log(url);
-    this.navCtrl.stack.push(url);
+    //console.log(this.history.history);
+    this.history.history.unshift(url);
     this.navCtrl.goForward(url);
   };
 
   goBack = () => {
-    this.navCtrl.stack.pop();
-    this.navCtrl.stack.pop();
-    this.navCtrl.stack.pop();
-    console.log(this.navCtrl.stack);
-    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
+    //console.log(this.history.history);
+    const url = this.history.history[0];
+    this.history.history.shift();
+    this.navCtrl.goBack(url);
   };
   liked = id => {
     for (let i = 0; i < this.storage.length; i++) {
@@ -103,7 +105,7 @@ export class ProfilePage implements OnInit {
       }
     }
     this.storage.setItem(id, id);
-    console.log(this.storage);
+    //console.log(this.storage);
     this.presentToastWithOptions("Add To Favorites");
   };
 

@@ -84,4 +84,6 @@
     <plugin name="cordova-plugin-photo-library" spec="^2.1.1">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To choose photos" />
     </plugin>
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
+    <engine name="browser" spec="5.0.4" />
 </widget>

@@ -1,30 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit } from "@angular/core";
+import { NavController } from "@ionic/angular";
+
+import { HistoryProvider } from "../../providers/history";
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.page.html',
-  styleUrls: ['./about.page.scss'],
+  selector: "app-about",
+  templateUrl: "./about.page.html",
+  styleUrls: ["./about.page.scss"]
 })
 export class AboutPage implements OnInit {
+  constructor(public navCtrl: NavController, public history: HistoryProvider) {}
 
-  constructor(public navCtrl:NavController) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
+  goTo = url => {
+    //console.log(this.history.history);
+    this.history.history.unshift(url);
+    this.navCtrl.goForward(url);
+  };
 
-  	goTo=(url)=>{
-  		console.log(url);
-	    this.navCtrl.stack.push(url);
-	    this.navCtrl.goForward(url);
-  	}
-
- 	goBack=()=>{
-	    this.navCtrl.stack.pop();
-	    this.navCtrl.stack.pop();
-	    this.navCtrl.stack.pop();
- 		console.log(this.navCtrl.stack);
-	    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length-1]);
-  	}
-
+  goBack = () => {
+    //console.log(this.history.history);
+    const url = this.history.history;
+    this.history.history.shift();
+    this.navCtrl.goBack(url);
+  };
 }

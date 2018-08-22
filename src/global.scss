@@ -11,36 +11,56 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-
-.home-imgs{
-	width:100vw;
+.home-imgs {
+  width: 100vw;
 }
-.photo-info{
-	font-size:16px;
-	padding-left:10px;
-	color:white;
-}
-
-.arrow-back{
-	padding-left:5px;
-	padding-right:5px;
-	width:30px;
-	height:30px;
+.photo-info {
+  font-size: 16px;
+  padding-left: 10px;
+  color: white;
 }
 
-.arrow-back:hover{
-	background-color:#140A1F;
+.arrow-back {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 30px;
+  height: 30px;
 }
 
-.spinner{
-	position:absolute;
-	width:10%;
-	height:10%;
-	top:45%;
-	left:45%;
+.arrow-back:hover {
+  background-color: #140a1f;
 }
 
-.search-icon{
-	font-size: 30px;
-	padding-right: 10px;
+.spinner {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  top: 45%;
+  left: 45%;
+}
+
+.search-icon {
+  font-size: 30px;
+  padding-right: 10px;
+}
+.menu-content {
+  background-image: url("./assets/snow.jpg");
+}
+
+.menu-footer {
+  color: #eece1a;
+  font-size: 15px;
+}
+
+.sub {
+  font-size: 10px;
+}
+
+.sub > a {
+  color: #0ec254;
+  text-decoration: none;
+}
+
+.items {
+  border-bottom: thin solid #475158;
 }

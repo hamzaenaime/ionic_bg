@@ -3,6 +3,8 @@ import { PhotosProvider } from "../../providers/photos";
 
 import { Content, NavController } from "@ionic/angular";
 
+import { HistoryProvider } from "../../providers/history";
+
 @Component({
   selector: "app-popular",
   templateUrl: "./popular.page.html",
@@ -16,7 +18,8 @@ export class PopularPage implements OnInit {
   scroll_fab: boolean;
   constructor(
     private photosProvider: PhotosProvider,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public history: HistoryProvider
   ) {
     this.page = 1;
     this.scroll_fab = false;
@@ -49,16 +52,13 @@ export class PopularPage implements OnInit {
   }
 
   goTo = url => {
-    console.log(url);
-    this.navCtrl.stack.push(url);
+    this.history.history.unshift(url);
     this.navCtrl.goForward(url);
   };
 
   goBack = () => {
-    this.navCtrl.stack.pop();
-    this.navCtrl.stack.pop();
-    this.navCtrl.stack.pop();
-    console.log(this.navCtrl.stack);
-    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
+    const url = this.history.history[0];
+    this.history.history.shift();
+    this.navCtrl.goBack(url);
   };
 }

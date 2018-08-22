@@ -55,7 +55,7 @@
 			</ion-fab-button>
 			<ion-fab-list side="top">
 				<ion-fab-button>
-					<ion-icon color="tertiary" name="cloud-download"></ion-icon>
+					<ion-icon (click)="downloadthis(pic.links.download)" color="tertiary" name="cloud-download"></ion-icon>
 				</ion-fab-button>
 				<ion-fab-button>
 					<ion-icon color="success" name="logo-whatsapp"></ion-icon>
@@ -68,6 +68,7 @@
 				</ion-fab-button>
 			</ion-fab-list>
 		</ion-fab>
+		<ion-button *ngIf="cordova" (click)="shareWhatsapp()">Share</ion-button>
 	</div>
 	<div *ngIf="!pic">
 		<ion-spinner name="crescent" class="spinner"></ion-spinner>

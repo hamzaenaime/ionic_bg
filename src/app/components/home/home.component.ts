@@ -3,6 +3,8 @@ import { PhotosProvider } from "../../providers/photos";
 
 import { NavController } from "@ionic/angular";
 
+import { HistoryProvider } from "../../providers/history";
+
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -47,7 +49,8 @@ export class HomeComponent implements OnInit {
   };
   constructor(
     private photosProvider: PhotosProvider,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public history: HistoryProvider
   ) {
     this.label = "welcome";
     this.scroll_fab = false;
@@ -57,7 +60,7 @@ export class HomeComponent implements OnInit {
   ionWillEnter() {
     this.photosProvider.getPhotos(this.page, this.label).then(photos => {
       this.popular = photos;
-      console.log(this.popular);
+      // console.log(this.popular);
     });
   }
   ngOnInit() {}
@@ -87,7 +90,7 @@ export class HomeComponent implements OnInit {
         this.page = 1;
         this.photosProvider.getCollections(1).then(categories => {
           this.categories = categories;
-          console.log(categories);
+          // console.log(categories);
         });
       } else {
         for (let i = 0; i < this.storage.length; i++) {
@@ -105,7 +108,7 @@ export class HomeComponent implements OnInit {
 
   clickButton = () => {
     this.page++;
-    console.log(this.page);
+    //console.log(this.page);
     if (this.label === "Popular") {
       this.photosProvider.getPhotos(this.page, this.label).then(popular => {
         this.popular = [...this.popular, ...popular];
@@ -137,13 +140,15 @@ export class HomeComponent implements OnInit {
     this.log();
   }
   goTo = url => {
-    console.log(url);
-    this.navCtrl.stack.push(url);
+    //console.log(this.history.history);
+    this.history.history.unshift(url);
     this.navCtrl.goForward(url);
   };
 
   goBack = () => {
-    this.navCtrl.stack.pop();
-    this.navCtrl.goBack(this.navCtrl.stack[this.navCtrl.stack.length - 1]);
+    //console.log(this.history.history);
+    const url = this.history.history[0];
+    this.history.history.shift();
+    this.navCtrl.goBack(url);
   };
 }
