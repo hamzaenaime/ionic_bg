@@ -14,6 +14,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { PhotosProvider } from "./providers/photos";
 import { HistoryProvider } from "./providers/history";
 
+import { PhotoLibrary } from "@ionic-native/photo-library/ngx";
+
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 
 @NgModule({
@@ -32,7 +34,8 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     PhotosProvider,
     HistoryProvider,
-    SocialSharing
+    SocialSharing,
+    PhotoLibrary
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

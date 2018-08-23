@@ -37,23 +37,31 @@ export class PhotoPage implements OnInit {
       //console.log(this.pic);
     });
     this.storage = window.localStorage;
-    console.log(this.socialSharing);
+    //console.log(this.socialSharing);
     this.cordova = this.platform.is("cordova");
-    console.log(this.platform);
+    //console.log(this.platform);
   }
 
   downloadthis = url => {
-    this.photosProvider.download(this.id);
-    this.photoLibrary
-      .saveImage(url, "downloads")
-      .then(() => console.log("download"))
-      .catch(err => console.log(err));
+    /*
+    this.platform.ready().then(() => {
+      console.log("platform ready ");
+      if (this.platform.is("cordova")) {
+        console.log("platform cordova ");
+        //this.photosProvider.download(this.id);
+        this.photoLibrary
+          .saveImage(url, "downloads")
+          .then(() => console.log("download"))
+          .catch(err => console.log(err));
+      }
+    });*/
   };
+
   shareWhatsapp = () => {
-    this.socialSharing
+    /* this.socialSharing
       .share("hello instagram", null, null, null)
       .then(() => console.log("works"))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err));*/
   };
   ngOnInit() {}
 

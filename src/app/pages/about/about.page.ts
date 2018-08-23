@@ -9,7 +9,10 @@ import { HistoryProvider } from "../../providers/history";
   styleUrls: ["./about.page.scss"]
 })
 export class AboutPage implements OnInit {
-  constructor(public navCtrl: NavController, public history: HistoryProvider) {}
+  year: string;
+  constructor(public navCtrl: NavController, public history: HistoryProvider) {
+    this.year = new Date().getFullYear().toString();
+  }
 
   ngOnInit() {}
 
